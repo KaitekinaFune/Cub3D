@@ -1,0 +1,15 @@
+*.o
+Cub3D
+test.c
+a.out
+libmlx.a
+libmlx.dylib
+Cub3D.dSYM
+libmlx.dylib.dSYM
+*.swiftsourceinfo
+dump.c
+.vscode
+libmlx_x86_64.a
+mlx-test
+screenshot.bmp
+bitmap.bmp

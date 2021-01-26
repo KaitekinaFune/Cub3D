@@ -6,124 +6,96 @@
 /*   By: lflint <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 13:14:27 by lflint            #+#    #+#             */
-/*   Updated: 2021/01/25 23:58:02 by lflint           ###   ########.fr       */
+/*   Updated: 2021/01/26 15:53:44 by lflint           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-char		*join_str(char const *s1, char const *s2)
+int			gnl_parse(t_gnl *gnl, int force, int return_value)
 {
-	size_t	s1_len;
-	size_t	s2_len;
-	size_t	stot_len;
-	char	*rtn;
-
-	if (!s1 && !s2)
-		return (0);
-	s1_len = ft_strlen((char *)s1);
-	s2_len = ft_strlen((char *)s2);
-	stot_len = s1_len + s2_len + 1;
-	rtn = malloc(sizeof(char) * stot_len);
-	if (!rtn)
-		return (0);
-	ft_memmove(rtn, s1, s1_len);
-	ft_memmove(rtn + s1_len, s2, s2_len);
-	rtn[stot_len - 1] = '\0';
-	free((char *)s1);
-	return (rtn);
+	if (!(gnl->done == 1 && !force))
+	{
+		gnl->done = 1;
+		gnl->reach = 0;
+		gnl->buf_size = BUFFER_SIZE;
+		gnl->line = NULL;
+		gnl->line_length = 0;
+	}
+	return (return_value);
 }
 
-int			has_return(char *str)
+char		*gnl_store(t_gnl *gnl, int force)
 {
-	int i;
+	char	c;
+	char	*str;
 
-	i = 0;
-	if (!str)
-		return (0);
-	while (str[i])
+	c = gnl->buf[gnl->buf_size];
+	gnl->buf_size += 1;
+	if (!(str = malloc((gnl->line_length + 1) * sizeof(char))))
+		return (NULL);
+	if (gnl->line != NULL)
 	{
-		if (str[i] == '\n')
+		ft_memcpy(str, gnl->line, gnl->line_length);
+		free(gnl->line);
+	}
+	if (c == '\n' || force)
+	{
+		str[gnl->line_length] = '\0';
+		gnl->line = NULL;
+		gnl->line_length = 0;
+		return (str);
+	}
+	str[gnl->line_length] = c;
+	gnl->line_length += 1;
+	gnl->line = str;
+	return (NULL);
+}
+
+int			gnl_read(t_gnl *gnl, char **ret_line)
+{
+	char	*str;
+	int		force;
+
+	while (gnl->buf_size < BUFFER_SIZE)
+	{
+		force = gnl->buf_size >= gnl->bytes;
+		str = gnl_store(gnl, force);
+		if (str != NULL)
+		{
+			if (force)
+				gnl->reach = 1;
+			*ret_line = (char *)str;
 			return (1);
-		i++;
+		}
 	}
 	return (0);
 }
 
-char		*get_save(char *save)
-{
-	char	*rtn;
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	if (!save)
-		return (0);
-	while (save[i] && save[i] != '\n')
-		i++;
-	if (!save[i])
-	{
-		free(save);
-		return (0);
-	}
-	if (!(rtn = malloc(sizeof(char) * ((ft_strlen(save) - i) + 1))))
-		return (0);
-	i++;
-	while (save[i])
-		rtn[j++] = save[i++];
-	rtn[j] = '\0';
-	free(save);
-	return (rtn);
-}
-
-char		*get_line(char *str)
-{
-	int		i;
-	char	*rtn;
-
-	i = 0;
-	if (!str)
-		return (0);
-	while (str[i] && str[i] != '\n')
-		i++;
-	if (!(rtn = malloc(sizeof(char) * (i + 1))))
-		return (0);
-	i = 0;
-	while (str[i] && str[i] != '\n')
-	{
-		rtn[i] = str[i];
-		i++;
-	}
-	rtn[i] = '\0';
-	return (rtn);
-}
-
 int			get_next_line(int fd, char **line)
 {
-	char			*buff;
-	static char		*save;
-	int				reader;
+	static t_gnl		gnls[256];
+	t_gnl				*gnl;
 
-	reader = 1;
-	if (fd < 0 || !line || BUFFER_SIZE <= 0)
+	if (line == NULL || BUFFER_SIZE == 0 || fd < 0)
 		return (-1);
-	if (!(buff = malloc(sizeof(char) * (BUFFER_SIZE + 1))))
-		return (-1);
-	while (!has_return(save) && reader != 0)
+	gnl = (gnls + fd);
+	*line = NULL;
+	gnl_parse(gnl, 0, 1);
+	while (42 > 21)
 	{
-		if ((reader = read(fd, buff, BUFFER_SIZE)) == -1)
+		if (gnl->buf_size == BUFFER_SIZE)
 		{
-			free(buff);
-			return (-1);
+			gnl->bytes = read(fd, gnl->buf, BUFFER_SIZE);
+			gnl->buf_size = 0;
 		}
-		buff[reader] = '\0';
-		save = join_str(save, buff);
+		if (gnl->bytes == (size_t)-1)
+			return (-1);
+		if (gnl_read(gnl, line))
+		{
+			if (gnl->bytes == 0 || gnl->reach)
+				return (gnl_parse(gnl, 1, 0));
+			return (1);
+		}
 	}
-	free(buff);
-	*line = get_line(save);
-	save = get_save(save);
-	if (reader == 0)
-		return (0);
-	return (1);
 }

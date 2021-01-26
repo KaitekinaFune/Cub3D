@@ -6,7 +6,7 @@
 /*   By: lflint <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 18:31:31 by lflint            #+#    #+#             */
-/*   Updated: 2021/01/26 15:49:21 by lflint           ###   ########.fr       */
+/*   Updated: 2021/01/26 15:54:01 by lflint           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,7 +219,7 @@ typedef struct	s_gnl
 	int			reach;
 	size_t		bytes;
 	size_t		buf_size;
-	size_t		lin_l;
+	size_t		line_length;
 	char		*line;
 	char		buf[BUFFER_SIZE];
 }				t_gnl;

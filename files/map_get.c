@@ -6,7 +6,7 @@
 /*   By: lflint <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 18:33:32 by lflint            #+#    #+#             */
-/*   Updated: 2021/01/26 16:09:50 by lflint           ###   ########.fr       */
+/*   Updated: 2021/01/26 16:24:11 by lflint           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,25 @@ static void		get_to_map(t_cub *cub, int fd)
 	}
 }
 
+void			dump_gnl(char *map_name)
+{
+	int		fd;
+	char	*temp;
+
+	temp = NULL;
+	fd = open(map_name, O_RDONLY);
+	while (get_next_line(fd, &temp))
+		ft_strdel(&temp);
+	ft_strdel(&temp);
+}
+
 int				get_map(t_cub *cub, char *map_name)
 {
 	int		i;
 	int		j;
 	int		fd;
 
+	dump_gnl(map_name);
 	if (!(i = map_size(map_name)))
 		cub_error(14, cub, "Bad Map!\n");
 	if (!(cub->map = malloc(sizeof(char *) * i + 1)))
@@ -89,6 +102,7 @@ int				get_map(t_cub *cub, char *map_name)
 	}
 	else
 		cub->map[j + 1] = NULL;
+	close(fd);
 	map_content(cub);
 	return (1);
 }

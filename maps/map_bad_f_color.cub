@@ -1,0 +1,18 @@
+R 1280 720
+
+NO ./textures/grey.png
+SO ./textures/mossy.png
+
+WE ./textures/redbrick.png
+
+EA ./textures/wood.png
+
+S ./textures/pillar.png
+
+F 260,100,255
+
+C 100,4,30
+
+111
+1N1
+111

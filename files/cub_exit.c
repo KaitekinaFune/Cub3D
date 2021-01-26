@@ -6,11 +6,20 @@
 /*   By: lflint <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 18:34:05 by lflint            #+#    #+#             */
-/*   Updated: 2021/01/26 15:50:37 by lflint           ###   ########.fr       */
+/*   Updated: 2021/01/26 16:05:31 by lflint           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	ft_strdel(char **as)
+{
+	if (as)
+	{
+		free(*as);
+		*as = NULL;
+	}
+}
 
 void		free_map(t_cub *cub)
 {
@@ -18,8 +27,8 @@ void		free_map(t_cub *cub)
 
 	i = -1;
 	while (cub->map[++i])
-		free(cub->map[i]);
-	free(cub->map);
+		ft_strdel(&cub->map[i]);
+	ft_strdel(cub->map);
 }
 
 int			catch_cross(t_cub *cub)

@@ -6,7 +6,7 @@
 /*   By: lflint <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 19:44:49 by lflint            #+#    #+#             */
-/*   Updated: 2021/01/25 19:46:07 by lflint           ###   ########.fr       */
+/*   Updated: 2021/01/26 16:07:05 by lflint           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void			free_textures(t_cub *cub, int err)
 
 	i = err - 6;
 	while (i >= 0)
-		free(cub->file.textures[i--]);
+		ft_strdel(&cub->file.textures[i--]);
 }
 
 void			free_textures_extra(t_cub *cub, int err)
@@ -27,7 +27,7 @@ void			free_textures_extra(t_cub *cub, int err)
 
 	i = err - 18;
 	while (i <= 22)
-		free(cub->file.textures[i++]);
+		ft_strdel(&cub->file.textures[i++]);
 }
 
 void			free_colors(t_cub *cub, int err)
@@ -36,5 +36,5 @@ void			free_colors(t_cub *cub, int err)
 
 	i = err - 11;
 	while (i >= 0)
-		free(cub->file.colors[i--]);
+		ft_strdel(&cub->file.colors[i--]);
 }

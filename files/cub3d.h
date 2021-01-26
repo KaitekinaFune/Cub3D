@@ -6,7 +6,7 @@
 /*   By: lflint <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 18:31:31 by lflint            #+#    #+#             */
-/*   Updated: 2021/01/26 15:54:01 by lflint           ###   ########.fr       */
+/*   Updated: 2021/01/26 16:06:21 by lflint           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -265,6 +265,7 @@ void			bmp_image_data(t_bmp_encode *encoder, t_buf *buf, int pos);
 int				buf_uint32(t_buf *buf, unsigned int value, int offset);
 int				buf_uint16(t_buf *buf, unsigned int value, int offset);
 int				buf_int32(t_buf *buf, int value, int offset);
+void			ft_strdel(char **as);
 /*
 ** cub_bmp_utils_extra.c
 */

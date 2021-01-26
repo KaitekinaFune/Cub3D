@@ -6,7 +6,7 @@
 /*   By: lflint <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 19:45:00 by lflint            #+#    #+#             */
-/*   Updated: 2021/01/25 19:48:38 by lflint           ###   ########.fr       */
+/*   Updated: 2021/01/26 16:09:46 by lflint           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ static void		cub_error_extra(int err_num, t_cub *cub)
 		free_textures(cub, 10);
 		free_map(cub);
 	}
-	free(cub);
 	exit(err_num);
 }
 
@@ -40,10 +39,7 @@ void			cub_error(int err_num, t_cub *cub, char *err)
 	write(1, "Error\n", 6);
 	write(1, err, ft_strlen(err));
 	if (err_num >= 3 && err_num <= 5)
-	{
-		free(cub);
 		exit(err_num);
-	}
 	else if (err_num >= 7 && err_num <= 10)
 		free_textures(cub, err_num);
 	else if (err_num == 11 || err_num == 12)
@@ -58,8 +54,6 @@ void			cub_error(int err_num, t_cub *cub, char *err)
 	}
 	else if (err_num > 13)
 		cub_error_extra(err_num, cub);
-	if (cub)
-		free(cub);
 	exit(err_num);
 }
 

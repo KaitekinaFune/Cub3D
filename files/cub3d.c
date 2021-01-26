@@ -6,7 +6,7 @@
 /*   By: lflint <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 18:31:39 by lflint            #+#    #+#             */
-/*   Updated: 2021/01/25 19:20:03 by lflint           ###   ########.fr       */
+/*   Updated: 2021/01/26 16:15:45 by lflint           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,26 @@ static void	init_struct(t_cub *cub)
 	cub->mlx.scr_h = 0;
 	while (++i < KEYSIZE)
 		cub->key[i] = 0;
+	i = -1;
+	while (++i < 5)
+		cub->file.textures[i] = NULL;
+	cub->file.colors[0] = NULL;
+	cub->file.colors[1] = NULL;
+	cub->map = NULL;
 }
 
 static void	map_parser(char *map_name, int mode)
 {
-	t_cub	*cub;
+	t_cub	cub;
 
-	if (!(cub = malloc(sizeof(t_cub))))
-		cub_error(3, cub, "No memory\n");
-	init_struct(cub);
-	get_file(cub, map_name);
-	check_textures(cub);
-	check_colors(cub);
-	get_map(cub, map_name);
-	if (!(map_holes(cub)))
-		cub_error(14, cub, "Hole in map\n");
-	cub_init(cub, mode);
+	init_struct(&cub);
+	get_file(&cub, map_name);
+	check_textures(&cub);
+	check_colors(&cub);
+	get_map(&cub, map_name);
+	if (!(map_holes(&cub)))
+		cub_error(14, &cub, "Hole in map\n");
+	cub_init(&cub, mode);
 }
 
 static int	check_save_arg(char *str, char *format)

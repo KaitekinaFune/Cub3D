@@ -6,7 +6,7 @@
 /*   By: lflint <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 18:39:05 by lflint            #+#    #+#             */
-/*   Updated: 2021/01/25 19:51:24 by lflint           ###   ########.fr       */
+/*   Updated: 2021/01/26 16:08:10 by lflint           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ void
 	char	*line;
 
 	i = 0;
+	line = NULL;
 	cub->file.space = 0;
 	if (!(check_ext(map_name, ".cub")))
 		cub_error(4, cub, "Invalid File Extension\n");

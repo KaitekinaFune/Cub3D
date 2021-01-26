@@ -6,7 +6,7 @@
 /*   By: lflint <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 18:31:39 by lflint            #+#    #+#             */
-/*   Updated: 2021/01/26 16:25:05 by lflint           ###   ########.fr       */
+/*   Updated: 2021/01/26 17:03:42 by lflint           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static void	init_struct(t_cub *cub)
 		cub->file.textures[i] = NULL;
 	cub->file.colors[0] = NULL;
 	cub->file.colors[1] = NULL;
+	cub->sprites = NULL;
 }
 
 static void	map_parser(char *map_name, int mode)

@@ -6,7 +6,7 @@
 /*   By: lflint <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 18:31:31 by lflint            #+#    #+#             */
-/*   Updated: 2021/01/26 16:06:21 by lflint           ###   ########.fr       */
+/*   Updated: 2021/01/26 17:06:31 by lflint           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 
 # ifdef __linux__
 #  define K_ESC		65307
-#  define K_LEFT		65361
+#  define K_LEFT	65361
 #  define K_RIGHT	65363
 #  define K_W		119
 #  define K_S		115
@@ -39,7 +39,7 @@
 #  define MAXRESH	1080
 # else
 #  define K_ESC		53
-#  define K_LEFT		123
+#  define K_LEFT	123
 #  define K_RIGHT	124
 #  define K_W		13
 #  define K_S		1

@@ -74,13 +74,7 @@ fclean	:	clean
 re		:	clean all
 
 run		:	$(NAME)
-	./$(NAME) maps/map_valid_no_space.cub
+	./$(NAME) maps/map_valid_with_spaces.cub
 
 bmp		:	$(NAME)
-	./$(NAME) maps/map_valid_no_space.cub --save
-
-valgr	:	re
-	valgrind --leak-check=full ./$(NAME) maps/map_valid_no_space.cub
-
-val_bmp	:	re
-	valgrind --leak-check=full --track-origins=yes ./$(NAME) maps/map_valid_no_space.cub --save
+	./$(NAME) maps/map_valid_with_spaces.cub --save

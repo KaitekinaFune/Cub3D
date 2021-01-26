@@ -6,13 +6,13 @@
 /*   By: lflint <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 18:34:05 by lflint            #+#    #+#             */
-/*   Updated: 2021/01/26 17:04:00 by lflint           ###   ########.fr       */
+/*   Updated: 2021/01/26 17:17:24 by lflint           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	ft_strdel(char **as)
+void		ft_strdel(char **as)
 {
 	if (as)
 	{

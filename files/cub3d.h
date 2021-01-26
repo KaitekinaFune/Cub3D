@@ -6,7 +6,7 @@
 /*   By: lflint <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 18:31:31 by lflint            #+#    #+#             */
-/*   Updated: 2021/01/26 17:06:31 by lflint           ###   ########.fr       */
+/*   Updated: 2021/01/26 17:26:34 by lflint           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <math.h>
-# include <stdio.h>
 
 # define MS 0.08f
 # define RS 0.06f
@@ -62,8 +61,6 @@
 # define KEYRELEASE	3
 
 # define BUFFER_SIZE 256
-
-void	ft_strdel(char **as);
 
 typedef struct	s_coords
 {
@@ -306,6 +303,7 @@ void			file_error(t_cub *cub, int mode, char *line);
 /*
 ** cub_exit.c
 */
+void			ft_strdel(char **as);
 void			free_map(t_cub *cub);
 int				catch_cross(t_cub *cub);
 void			cub_exit(t_cub *cub, int i);

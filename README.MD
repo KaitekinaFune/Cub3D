@@ -1,6 +1,6 @@
 # Cub3D
 
-**The goal of the projects is to create a “realistic” 3D graphical representation of the inside of a maze from a first person perspective. You have to create this representation using the _Ray-Casting_.**
+**The goal of this project wat to create a “realistic” 3D graphical representation of the inside of a maze from a first person perspective. You have to create this representation using the _Ray-Casting_.**
 
 **Цель проекта - создать "реалистичную" 3D проекцию лабиринта от первого лица. Это нужно сделать с помощью алгоритма проброски лучей, _Ray-Casting_.**
 
